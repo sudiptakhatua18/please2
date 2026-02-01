@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine Surprise</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: linear-gradient(to bottom, #ffb6c1, #ffffff);
+      overflow: hidden;
+    }
+
+    /* ✅ Responsive Heading */
+    h1 {
+      margin-top: 40px;
+      font-size: 28px;
+      color: darkred;
+    }
+
+    .emoji-line {
+      font-size: 20px;
+      margin-top: 10px;
+    }
+
+    /* 🐻 First GIF Responsive */
+    .cute-gif img {
+      width: 120px;
+      max-width: 40%;
+      margin-top: 15px;
+      border-radius: 15px;
+      background: white;
+      padding: 6px;
+      box-shadow: 0px 3px 10px rgba(0,0,0,0.2);
+    }
+
+    /* Buttons Container */
+    .btn-container {
+      margin-top: 30px;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 12px 35px;
+      margin: 15px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+    }
+
+    #yesBtn {
+      background: green;
+      color: white;
+    }
+
+    #noBtn {
+      background: red;
+      color: white;
+      position: absolute;
+    }
+
+    /* 💋 Kiss GIF Responsive */
+    #kissGif {
+      display: none;
+      margin-top: 20px;
+    }
+
+    #kissGif img {
+      width: 110px;
+      max-width: 45%;
+      border-radius: 18px;
+      background: linear-gradient(to bottom, #ffe6f0, #ffffff);
+      padding: 8px;
+      box-shadow: 0px 3px 12px rgba(0,0,0,0.25);
+    }
+
+    /* 🌹 Rose Blast Animation */
+    .rose {
+      position: absolute;
+      font-size: 22px;
+      animation: fall 3s linear forwards;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(500px) scale(1.3);
+        opacity: 0;
+      }
+    }
+
+    /* ✅ Mobile Extra Adjustments */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 24px;
+      }
+
+      button {
+        font-size: 16px;
+        padding: 10px 28px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Will you be my Valentine? ❤️</h1>
+
+  <!-- 🐻 Bubu-Dudu GIF -->
+  <div class="cute-gif">
+    <img src="bubu-dudu.gif" alt="Cute Bubu Dudu">
+  </div>
+
+  <div class="emoji-line">
+    🌹🍫❤️💘🌹
+  </div>
+
+  <!-- Buttons -->
+  <div class="btn-container">
+    <button id="yesBtn">Yes 💘</button>
+    <button id="noBtn">No 💔</button>
+  </div>
+
+  <!-- 💋 Kiss GIF after Yes -->
+  <div id="kissGif">
+    <img src="kiss-love.gif" alt="Kiss Love Gif">
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const kissGif = document.getElementById("kissGif");
+
+    // ❌ No Button Runs Away (Works on Laptop + Phone)
+    function moveNoButton() {
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 120);
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
+
+    noBtn.addEventListener("mouseover", moveNoButton);
+    noBtn.addEventListener("touchstart", moveNoButton);
+
+    // 🌹 Rose Blast
+    function roseBlast() {
+      for (let i = 0; i < 20; i++) {
+        let rose = document.createElement("div");
+        rose.classList.add("rose");
+        rose.innerHTML = "🌹";
+
+        rose.style.left = Math.random() * window.innerWidth + "px";
+        rose.style.top = Math.random() * 150 + "px";
+
+        document.body.appendChild(rose);
+
+        setTimeout(() => {
+          rose.remove();
+        }, 3000);
+      }
+    }
+
+    // ✅ Yes Click Event
+    yesBtn.addEventListener("click", function () {
+      kissGif.style.display = "block";
+      roseBlast();
+    });
+  </script>
+
+</body>
+</html>
